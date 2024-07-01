@@ -14,56 +14,42 @@
   <body>
     <script>
       function addtodo() {
-        const inputValue = document.getElementById("input").value.trim();
-        
-        if (inputValue === "") {
-          return; // if input is empty, do nothing
-        }
+        const inputValue = document.getElementById("input").value;
+        if (inputValue.trim() === "") return; // ไม่เพิ่มรายการว่างเปล่า
+        let newElement = document.createElement("li");
+        newElement.classList.add("list-group-item");
+
+        let newTxtElement = document.createTextNode(inputValue);
+        newElement.appendChild(newTxtElement);
+
+        // ปุ่มลบ
+        let deleteButton = document.createElement("button");
+        deleteButton.classList.add("btn", "btn-danger", "btn-sm", "float-end");
+        deleteButton.innerText = "ลบ";
+        deleteButton.onclick = function () {
+          this.parentElement.remove();
+        };
+        newElement.appendChild(deleteButton);
 
         let listElement = document.getElementById("listtodo");
-        
-        // Clear existing items
-        listElement.innerHTML = "";
+        listElement.appendChild(newElement);
 
-        // Split input into items by newline
-        const items = inputValue.split('\n');
-
-        // Create new items
-        items.forEach(item => {
-          if (item.trim() !== "") {
-            let newElement = document.createElement("li");
-            newElement.classList.add("list-group-item");
-            let newTxtElement = document.createTextNode(item.trim());
-            newElement.appendChild(newTxtElement);
-
-            // create delete button
-            let deleteButton = document.createElement("button");
-            deleteButton.className = "btn btn-danger btn-sm ms-2";
-            deleteButton.textContent = "-";
-            deleteButton.onclick = function () {
-              this.parentNode.remove(); // remove the <li> when delete button is clicked
-            };
-            newElement.appendChild(deleteButton);
-
-            listElement.appendChild(newElement);
-          }
-        });
-
-        // Clear input after adding todos
-        document.getElementById("input").value = "";
+        document.getElementById("input").value = ""; // ลบข้อความใน input
       }
     </script>
     <div class="container">
-      <h1 class="my-3">My to do list</h1>
+      <h1 class="my-3">My to-do</h1>
       <div class="row">
         <div class="col col-md-4 col-sm-12">
           <div class="input-group mb-3">
-            <textarea
+            <input
               id="input"
+              type="text"
               class="form-control"
-              placeholder="What would you like to do?"
+              placeholder="ใส่สิ่งที่คุณต้องการจะทำ"
               aria-label="todo name"
-            ></textarea>
+              aria-describedby="button-add"
+            />
             <button
               class="btn btn-primary"
               type="button"
