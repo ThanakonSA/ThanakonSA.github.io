@@ -24,14 +24,14 @@
           let newTxtElement = document.createTextNode(inputValue);
           newElement.appendChild(newTxtElement);
 
-          // Create delete button
-          let deleteButton = document.createElement("button");
-          deleteButton.classList.add("btn", "btn-danger", "btn-sm");
-          deleteButton.innerHTML = "&times;";
-          deleteButton.onclick = function() {
-            this.parentElement.remove();
+          // Create clear text button
+          let clearTextButton = document.createElement("button");
+          clearTextButton.classList.add("btn", "btn-warning", "btn-sm", "ms-2");
+          clearTextButton.innerHTML = "Clear Text";
+          clearTextButton.onclick = function() {
+            newTxtElement.textContent = "";
           };
-          newElement.appendChild(deleteButton);
+          newElement.appendChild(clearTextButton);
 
           // Append new item to list
           let listElement = document.getElementById("listtodo");
@@ -69,7 +69,7 @@
           <ul class="list-group" id="listtodo">
             <li class="list-group-item d-flex justify-content-between align-items-center">
               An item
-              <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove();">&times;</button>
+              <button class="btn btn-warning btn-sm ms-2" onclick="this.previousSibling.textContent = '';">Clear Text</button>
             </li>
           </ul>
         </div>
