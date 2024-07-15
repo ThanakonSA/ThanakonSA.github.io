@@ -21,7 +21,7 @@
       <div id="name" class="row"></div>
     </div>
     <script>
-      fetch("https://pokeapi.co/api/v2/pokemon")
+      fetch("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
         .then((res) => res.json())
         .then((data) => {
           const datas = data["results"];
