@@ -1,1 +1,0 @@
-console.log("This call from JS File");
